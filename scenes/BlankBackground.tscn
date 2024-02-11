@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dopmbpgjbfo5p"]
+
+[ext_resource type="Texture2D" uid="uid://b1h26pom63nlo" path="res://assets/levels/emptypage.png" id="1_c3pg7"]
+
+[node name="BlankBackground" type="CanvasLayer"]
+layer = -1
+
+[node name="Blank" type="Sprite2D" parent="."]
+position = Vector2(956, 693)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("1_c3pg7")

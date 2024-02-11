@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://xtt0k6a4f042"]
+
+[ext_resource type="Texture2D" uid="uid://d4ftyrw85ojhk" path="res://assets/levels/stage3parallex.png" id="1_7j000"]
+[ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_f1uky"]
+[ext_resource type="Texture2D" uid="uid://de2uve8b567dv" path="res://assets/levels/stage3scene2.png" id="2_mp4w6"]
+[ext_resource type="PackedScene" uid="uid://dtxv8pnlo7hax" path="res://scenes/Teardrop.tscn" id="3_skiw4"]
+[ext_resource type="Script" path="res://scripts/NextLevel.gd" id="4_2d6eq"]
+[ext_resource type="Texture2D" uid="uid://cs0o5chs7rbae" path="res://assets/texts/scene3sentance3-1.png" id="4_ktb8y"]
+[ext_resource type="Texture2D" uid="uid://vtgqkbxlhl2r" path="res://assets/texts/scene3sentance3-2.png" id="5_aixy8"]
+[ext_resource type="PackedScene" uid="uid://f4lf446nhojp" path="res://scenes/Stage3-3.tscn" id="5_s5ym3"]
+[ext_resource type="Script" path="res://scripts/TextAppear.gd" id="6_1gckb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8g5wm"]
+size = Vector2(1, 448)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jfohj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ktb8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aixy8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02d28"]
+size = Vector2(7, 125)
+
+[node name="Stage3-2" type="Node2D"]
+script = ExtResource("1_f1uky")
+
+[node name="MotionlessBackground" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite2D" parent="MotionlessBackground"]
+position = Vector2(961, 407)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("1_7j000")
+
+[node name="Clouds" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 550)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("2_mp4w6")
+
+[node name="Main" type="StaticBody2D" parent="."]
+
+[node name="CloudCollision" type="CollisionPolygon2D" parent="Main"]
+position = Vector2(0, 113)
+polygon = PackedVector2Array(1, 878, 39, 885, 76, 882, 113, 870, 162, 872, 181, 880, 225, 882, 258, 872, 310, 877, 343, 889, 382, 900, 432, 902, 474, 901, 502, 898, 530, 894, 562, 894, 622, 898, 673, 896, 732, 890, 780, 884, 839, 883, 917, 893, 974, 904, 1029, 911, 1092, 915, 1151, 902, 1252, 896, 1303, 889, 1348, 899, 1397, 896, 1453, 907, 1497, 895, 1552, 900, 1601, 908, 1656, 915, 1705, 919, 1742, 915, 1793, 913, 1868, 917, 1908, 917, 1920, 917, 1919, 944, -16, 939, -16, 778, -1, 778)
+
+[node name="Teardrop" parent="." instance=ExtResource("3_skiw4")]
+position = Vector2(87, 915)
+initial_zoom = Vector2(1, 1)
+initial_scale = Vector2(3, 3)
+
+[node name="NextStage" type="Area2D" parent="."]
+position = Vector2(-276, -322)
+script = ExtResource("4_2d6eq")
+next_level = ExtResource("5_s5ym3")
+
+[node name="NextStageCollision" type="CollisionShape2D" parent="NextStage"]
+position = Vector2(2205, 1144)
+shape = SubResource("RectangleShape2D_8g5wm")
+
+[node name="Text1" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 100
+position = Vector2(972, 759)
+sprite_frames = SubResource("SpriteFrames_jfohj")
+autoplay = "default"
+
+[node name="TextAppear" type="Area2D" parent="." node_paths=PackedStringArray("text")]
+position = Vector2(632, 510)
+script = ExtResource("6_1gckb")
+text = NodePath("../Text1")
+
+[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
+position = Vector2(288.5, 416.5)
+shape = SubResource("RectangleShape2D_02d28")
+
+[connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
+[connection signal="body_entered" from="TextAppear" to="TextAppear" method="_on_body_entered"]

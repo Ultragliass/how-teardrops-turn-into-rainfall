@@ -1,0 +1,121 @@
+[gd_scene load_steps=16 format=3 uid="uid://j4ixq56imk1t"]
+
+[ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_wq383"]
+[ext_resource type="Texture2D" uid="uid://bnl373wy6wjh6" path="res://assets/levels/stage1scene1.png" id="2_0jgvd"]
+[ext_resource type="Script" path="res://scripts/NextLevel.gd" id="4_ldwda"]
+[ext_resource type="PackedScene" uid="uid://dtxv8pnlo7hax" path="res://scenes/Teardrop.tscn" id="5_28l0u"]
+[ext_resource type="PackedScene" uid="uid://8uihdx84efla" path="res://scenes/Stage1-2.tscn" id="5_s5h5h"]
+[ext_resource type="Texture2D" uid="uid://dtyshmv4c017j" path="res://assets/texts/scene1sentance2-1.png" id="6_plvil"]
+[ext_resource type="Texture2D" uid="uid://7my67qmq2cwe" path="res://assets/texts/scene1sentance1-1.png" id="6_rw1ee"]
+[ext_resource type="Texture2D" uid="uid://dfushm1wgxq5h" path="res://assets/texts/scene1sentance1-2.png" id="7_hlkal"]
+[ext_resource type="Texture2D" uid="uid://cfify4fgdjtbi" path="res://assets/texts/scene1sentance2-2.png" id="7_tyt5t"]
+[ext_resource type="Script" path="res://scripts/TextAppear.gd" id="8_e7nj0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6m0le"]
+size = Vector2(1, 448)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c8hhd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_rw1ee")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hlkal")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eg0dt"]
+size = Vector2(185.5, 4.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tqkm5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_plvil")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tyt5t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtwnm"]
+size = Vector2(6, 289.125)
+
+[node name="Stage1-1" type="Node2D"]
+position = Vector2(276, 322)
+script = ExtResource("1_wq383")
+
+[node name="Face" type="Sprite2D" parent="."]
+position = Vector2(685, 85)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("2_0jgvd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="LipCollision" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(539, -106)
+polygon = PackedVector2Array(-561, 688, -502, 724, -444, 740, -405, 743, -366, 738, -313, 730, -251, 719, -185, 700, -123, 676, -83.0001, 659, -28.0001, 630, -6.00006, 614, 11.9999, 599, 16.9999, 597, 22.9999, 598, 31.9999, 606, 56.9999, 614, 88.9999, 620, 134, 628, 158, 634, 194, 636, 219, 629, 241, 620, 255, 613, 266, 611, 274, 613, 280, 616, 290, 625, 365, 673, 418, 702, 479, 739, 517, 761, 577, 777, 639, 790, 725, 803, 814, 811, 876, 819, 923, 828, 973, 835, 1016, 833, 1068, 831, 1105, 831, 985, 841, 883, 829, 700, 808, 552, 789, 386, 713, 259, 628, 178, 655, 87.9999, 646, 11.9999, 621, -52.0001, 659, -161, 713, -301, 741, -442, 751, -532, 723, -560, 699)
+
+[node name="NoseCollsion" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(606, -318, 606, -263, 601, -212, 593, -151, 582, -94, 554, -36, 531, 16, 511, 55, 486, 87, 478, 130, 483, 150, 496, 172, 506, 184, 495, 139, 502, 107, 543, 38, 574, -14, 614, -108, 626, -200, 626, -270)
+
+[node name="CheekCollision" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-23, 577, 15, 555, 58, 520, 121, 464, 184, 388, 213, 345, 223, 303, 235, 279, 238, 294, 228, 336, 208, 379, 165, 433, 133, 471, 89, 510, 56, 537, 21, 564, -3, 574)
+
+[node name="Teardrop" parent="." instance=ExtResource("5_28l0u")]
+position = Vector2(562, -314)
+player_control_timeout = 150.0
+initial_zoom = Vector2(2.5, 2.5)
+initial_scale = Vector2(1, 1)
+
+[node name="NextStage" type="Area2D" parent="."]
+position = Vector2(-276, -322)
+script = ExtResource("4_ldwda")
+next_level = ExtResource("5_s5h5h")
+
+[node name="NextStageCollision" type="CollisionShape2D" parent="NextStage"]
+position = Vector2(1922, 823)
+shape = SubResource("RectangleShape2D_6m0le")
+
+[node name="Text1" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(344, 462)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_c8hhd")
+autoplay = "default"
+
+[node name="TextAppear1" type="Area2D" parent="." node_paths=PackedStringArray("text")]
+position = Vector2(1118.5, 727)
+script = ExtResource("8_e7nj0")
+text = NodePath("../Text1")
+
+[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear1"]
+position = Vector2(-717.5, -523)
+shape = SubResource("RectangleShape2D_eg0dt")
+
+[node name="Text2" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1093, 440)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_tqkm5")
+autoplay = "default"
+
+[node name="TextAppear2" type="Area2D" parent="." node_paths=PackedStringArray("text")]
+position = Vector2(997, 494)
+script = ExtResource("8_e7nj0")
+text = NodePath("../Text2")
+
+[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear2"]
+position = Vector2(-189, -149.438)
+shape = SubResource("RectangleShape2D_gtwnm")
+
+[connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
+[connection signal="body_entered" from="TextAppear1" to="TextAppear1" method="_on_body_entered"]
+[connection signal="body_entered" from="TextAppear2" to="TextAppear2" method="_on_body_entered"]

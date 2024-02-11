@@ -1,0 +1,191 @@
+[gd_scene load_steps=20 format=3 uid="uid://bp7tti5pid3bb"]
+
+[ext_resource type="Texture2D" uid="uid://d4ftyrw85ojhk" path="res://assets/levels/stage3parallex.png" id="1_eg0rf"]
+[ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_w8534"]
+[ext_resource type="Texture2D" uid="uid://dd1cwiscqghfl" path="res://assets/levels/stage3scene1.png" id="2_cq05a"]
+[ext_resource type="PackedScene" uid="uid://dtxv8pnlo7hax" path="res://scenes/Teardrop.tscn" id="3_ur02o"]
+[ext_resource type="Script" path="res://scripts/RaindropArea.gd" id="4_8f53f"]
+[ext_resource type="Script" path="res://scripts/NextLevel.gd" id="4_iuktw"]
+[ext_resource type="Texture2D" uid="uid://b6xr4fjs05iwg" path="res://assets/texts/scene3sentance1-1.png" id="5_lpq5m"]
+[ext_resource type="PackedScene" uid="uid://xtt0k6a4f042" path="res://scenes/Stage3-2.tscn" id="5_xkc20"]
+[ext_resource type="Texture2D" uid="uid://blsphcxhra6ng" path="res://assets/texts/scene3sentance1-2.png" id="6_cs2ne"]
+[ext_resource type="Script" path="res://scripts/TextAppear.gd" id="7_q516g"]
+[ext_resource type="Texture2D" uid="uid://i5kputlrlbm3" path="res://assets/texts/scene3sentance2-1.png" id="8_ba0ks"]
+[ext_resource type="Texture2D" uid="uid://bsmmgmojx6pkf" path="res://assets/texts/scene3sentance2-2.png" id="9_2g8yr"]
+[ext_resource type="PackedScene" uid="uid://bm81e27jo66lk" path="res://scenes/TeardropNPC2.tscn" id="11_824i7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey04x"]
+size = Vector2(1, 448)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_metgn"]
+size = Vector2(401, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1hmby"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lpq5m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cs2ne")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77a1t"]
+size = Vector2(84, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kll5s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ba0ks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2g8yr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxlgi"]
+size = Vector2(723, 122.875)
+
+[node name="Stage3-1" type="Node2D"]
+script = ExtResource("1_w8534")
+
+[node name="MotionlessBackground" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite2D" parent="MotionlessBackground"]
+position = Vector2(961, 407)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("1_eg0rf")
+
+[node name="Clouds" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 550)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("2_cq05a")
+
+[node name="Main" type="StaticBody2D" parent="."]
+
+[node name="CloudCollision" type="CollisionPolygon2D" parent="Main"]
+position = Vector2(0, 113)
+polygon = PackedVector2Array(-1, 153, -1, 351, 36, 365, 45, 348, 68, 339, 90, 335, 114, 342, 135, 352, 149, 348, 171, 346, 189, 351, 203, 363, 221, 384, 237, 390, 247, 395, 251, 405, 255, 420, 258, 431, 267, 435, 288, 438, 310, 441, 326, 445, 341, 448, 351, 444, 366, 433, 387, 420, 400, 410, 416, 399, 429, 398, 439, 403, 449, 408, 456, 404, 463, 397, 473, 389, 487, 383, 501, 379, 519, 375, 536, 370, 552, 367, 577, 368, 599, 374, 623, 382, 634, 388, 640, 395, 648, 406, 658, 416, 666, 433, 666, 447, 663, 464, 663, 473, 677, 482, 693, 491, 703, 503, 702, 517, 686, 539, 655, 560, 642, 573, 665, 575, 678, 579, 685, 592, 686, 602, 690, 611, 707, 612, 736, 617, 757, 624, 773, 627, 776, 634, 787, 638, 797, 638, 806, 633, 818, 629, 835, 627, 855, 626, 864, 628, 870, 641, 890, 641, 923, 637, 956, 635, 999, 635, 1039, 637, 1058, 641, 1082, 633, 1114, 625, 1161, 622, 1181, 626, 1207, 622, 1246, 617, 1268, 617, 1290, 607, 1321, 604, 1346, 602, 1376, 596, 1398, 595, 1417, 591, 1441, 585, 1447, 571, 1445, 558, 1443, 546, 1444, 534, 1452, 527, 1483, 515, 1505, 506, 1526, 500, 1548, 489, 1568, 481, 1591, 473, 1600, 472, 1605, 466, 1616, 457, 1628, 448, 1657, 441, 1679, 439, 1708, 437, 1732, 436, 1758, 435, 1782, 433, 1800, 430, 1812, 425, 1826, 419, 1841, 418, 1855, 421, 1868, 429, 1892, 441, 1905, 451, 1916, 456, 1430, 636, 1037, 720, 762, 703, 600, 614, 532, 510, 459, 466, 183, 512, 99, 451, 4, 414, -30, 384, -27, 149)
+
+[node name="Teardrop" parent="." instance=ExtResource("3_ur02o")]
+position = Vector2(314, 1131)
+collision_mask = 3
+initial_zoom = Vector2(1.2, 1.2)
+initial_scale = Vector2(1, 1)
+is_cloud = true
+
+[node name="NextStage" type="Area2D" parent="."]
+position = Vector2(-276, -322)
+script = ExtResource("4_iuktw")
+next_level = ExtResource("5_xkc20")
+
+[node name="NextStageCollision" type="CollisionShape2D" parent="NextStage"]
+position = Vector2(2203, 706)
+shape = SubResource("RectangleShape2D_ey04x")
+
+[node name="RaindropArea" type="Area2D" parent="."]
+script = ExtResource("4_8f53f")
+
+[node name="RaindropCollision" type="CollisionShape2D" parent="RaindropArea"]
+position = Vector2(257, -75)
+shape = SubResource("RectangleShape2D_metgn")
+
+[node name="Text1" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 100
+position = Vector2(340, 249)
+sprite_frames = SubResource("SpriteFrames_1hmby")
+autoplay = "default"
+frame_progress = 0.996265
+
+[node name="TextAppear" type="Area2D" parent="." node_paths=PackedStringArray("text")]
+script = ExtResource("7_q516g")
+text = NodePath("../Text1")
+
+[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
+position = Vector2(320, 412)
+shape = SubResource("RectangleShape2D_77a1t")
+
+[node name="Text2" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+position = Vector2(1105, 406)
+sprite_frames = SubResource("SpriteFrames_kll5s")
+autoplay = "default"
+
+[node name="TextAppear2" type="Area2D" parent="." node_paths=PackedStringArray("text")]
+script = ExtResource("7_q516g")
+text = NodePath("../Text2")
+
+[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear2"]
+position = Vector2(1063, 438.438)
+shape = SubResource("RectangleShape2D_pxlgi")
+
+[node name="TeardropNPC2" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1018, 576)
+
+[node name="TeardropNPC3" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1166, 583)
+
+[node name="TeardropNPC4" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1303, 612)
+
+[node name="TeardropNPC5" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1054, 455)
+
+[node name="TeardropNPC6" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1202, 462)
+
+[node name="TeardropNPC7" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1339, 491)
+
+[node name="TeardropNPC8" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(818, 668)
+
+[node name="TeardropNPC9" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(966, 675)
+
+[node name="TeardropNPC10" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1103, 704)
+
+[node name="TeardropNPC11" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(962, 504)
+
+[node name="TeardropNPC12" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1110, 511)
+
+[node name="TeardropNPC13" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1247, 540)
+
+[node name="TeardropNPC14" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(998, 383)
+
+[node name="TeardropNPC15" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1146, 390)
+
+[node name="TeardropNPC16" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1283, 419)
+
+[node name="TeardropNPC17" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(762, 596)
+
+[node name="TeardropNPC18" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(910, 603)
+
+[node name="TeardropNPC19" parent="." instance=ExtResource("11_824i7")]
+position = Vector2(1047, 632)
+
+[connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
+[connection signal="body_entered" from="RaindropArea" to="RaindropArea" method="_on_body_entered"]
+[connection signal="body_entered" from="TextAppear" to="TextAppear" method="_on_body_entered"]
+[connection signal="body_entered" from="TextAppear2" to="TextAppear2" method="_on_body_entered"]

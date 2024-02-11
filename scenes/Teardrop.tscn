@@ -1,0 +1,108 @@
+[gd_scene load_steps=16 format=3 uid="uid://dtxv8pnlo7hax"]
+
+[ext_resource type="Script" path="res://scripts/Teardrop.gd" id="1_h36jw"]
+[ext_resource type="Texture2D" uid="uid://d3ldg4hxs6y3o" path="res://assets/player/idle1.png" id="2_l3bh4"]
+[ext_resource type="Texture2D" uid="uid://biu2n78n7574e" path="res://assets/player/fall.png" id="2_qq7u1"]
+[ext_resource type="Texture2D" uid="uid://bkwmd4vw2p6ff" path="res://assets/player/idle2.png" id="3_jybkh"]
+[ext_resource type="Texture2D" uid="uid://dlwwfhacna4w" path="res://assets/player/idle3.png" id="4_2kskw"]
+[ext_resource type="Texture2D" uid="uid://sxuq5f6xykqs" path="res://assets/player/idle4.png" id="5_48ehf"]
+[ext_resource type="Texture2D" uid="uid://drx0x5tfw81l2" path="res://assets/player/idle5.png" id="6_4h3av"]
+[ext_resource type="Texture2D" uid="uid://cjyo5lblojvtt" path="res://assets/player/gasform1.png" id="6_led1v"]
+[ext_resource type="Texture2D" uid="uid://dw4vu82kqsa11" path="res://assets/player/gasform2.png" id="7_djlmi"]
+[ext_resource type="Texture2D" uid="uid://hyq3xsvf70s" path="res://assets/player/jump1.png" id="7_m0i42"]
+[ext_resource type="Texture2D" uid="uid://d1icoixyfq3f5" path="res://assets/player/jump2.png" id="8_dgsjj"]
+[ext_resource type="Texture2D" uid="uid://blpajo3y4035d" path="res://assets/player/jump3.png" id="9_m67e6"]
+[ext_resource type="Texture2D" uid="uid://dxqvnr8l51q2e" path="res://assets/player/jump4.png" id="10_jsy00"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_62a5y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qq7u1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_m67e6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dgsjj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m0i42")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_led1v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_djlmi")
+}],
+"loop": true,
+"name": &"gas",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l3bh4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jybkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2kskw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_48ehf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4h3av")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_m0i42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dgsjj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_m67e6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jsy00")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ylqjl"]
+radius = 41.0122
+
+[node name="Teardrop" type="CharacterBody2D"]
+script = ExtResource("1_h36jw")
+
+[node name="TeardropAnimation" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_62a5y")
+animation = &"fall"
+autoplay = "idle"
+
+[node name="TeardropCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ylqjl")
+
+[node name="TeardropCamera" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
+limit_smoothed = true
+
+[connection signal="animation_finished" from="TeardropAnimation" to="." method="_on_teardrop_animation_animation_finished"]

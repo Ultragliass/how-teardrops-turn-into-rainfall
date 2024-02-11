@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm81e27jo66lk"]
+
+[ext_resource type="Texture2D" uid="uid://dv8b1rmewwbr2" path="res://assets/entities/circle1.png" id="1_vek51"]
+[ext_resource type="Texture2D" uid="uid://poap8jqp1tmc" path="res://assets/entities/circle2.png" id="2_2ebs5"]
+[ext_resource type="Texture2D" uid="uid://lbh3dumns0jk" path="res://assets/entities/circle3.png" id="3_mk7sx"]
+[ext_resource type="Texture2D" uid="uid://cfvihlit5jmln" path="res://assets/entities/circle4.png" id="4_jyh6v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uiyv4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vek51")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2ebs5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mk7sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jyh6v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3bt5u"]
+radius = 44.4185
+
+[node name="TeardropNPC2" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 3
+
+[node name="TeardropNPCAnimation" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_uiyv4")
+autoplay = "default"
+frame_progress = 0.214797
+
+[node name="TeardropNPCCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-2.38419e-07, -1.19209e-07)
+rotation = 0.598648
+shape = SubResource("CircleShape2D_3bt5u")

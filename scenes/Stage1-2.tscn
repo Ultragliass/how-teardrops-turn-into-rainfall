@@ -1,0 +1,165 @@
+[gd_scene load_steps=21 format=3 uid="uid://8uihdx84efla"]
+
+[ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_cg4cf"]
+[ext_resource type="Texture2D" uid="uid://de4vax6gfqh5u" path="res://assets/levels/stage1scene2.png" id="1_epu1m"]
+[ext_resource type="PackedScene" uid="uid://dtxv8pnlo7hax" path="res://scenes/Teardrop.tscn" id="2_oe1jh"]
+[ext_resource type="Script" path="res://scripts/NextLevel.gd" id="3_eh2jp"]
+[ext_resource type="PackedScene" uid="uid://ca15000f1ly0n" path="res://scenes/Stage2-1.tscn" id="4_ma7eb"]
+[ext_resource type="Texture2D" uid="uid://ycw8bk4kjylw" path="res://assets/texts/scene1sentance3-1.png" id="5_6obyx"]
+[ext_resource type="Texture2D" uid="uid://cpjdltlgplgo2" path="res://assets/texts/scene1sentance3-2.png" id="6_oa85y"]
+[ext_resource type="Script" path="res://scripts/TextAppear.gd" id="7_t4q6k"]
+[ext_resource type="Texture2D" uid="uid://xh5hcvdajera" path="res://assets/texts/scene1sentance4-1.png" id="8_ebexj"]
+[ext_resource type="Texture2D" uid="uid://bab217j5tlm6o" path="res://assets/texts/scene1sentance4-2.png" id="9_mjdsx"]
+[ext_resource type="Texture2D" uid="uid://cy2jisgmmm75r" path="res://assets/entities/tongue1.png" id="10_62u8n"]
+[ext_resource type="Script" path="res://scripts/LickFollowPath.gd" id="10_r4k3b"]
+[ext_resource type="Texture2D" uid="uid://dyvgsveapl8pn" path="res://assets/entities/tongue2.png" id="11_k4v7h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_suhr2"]
+size = Vector2(236.375, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uover"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_6obyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_oa85y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32gqi"]
+size = Vector2(10, 65)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xhyjv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ebexj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mjdsx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8wla"]
+size = Vector2(7, 618.5)
+
+[sub_resource type="Curve2D" id="Curve2D_0q60t"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 894, 1140, 0, 0, 0, 0, 893, 251)
+}
+point_count = 2
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tpe0j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_62u8n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_k4v7h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Stage1-2" type="Node2D"]
+script = ExtResource("1_cg4cf")
+
+[node name="Lip" type="Sprite2D" parent="."]
+position = Vector2(962, 508)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("1_epu1m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 110)
+
+[node name="LipCollision" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(650, 91)
+polygon = PackedVector2Array(1106, 987, 1129, 945, 1117, 889, 1085, 844, 998, 832, 853, 829, 752, 807, 667, 775, 589, 743, 532, 719, 473, 693, 430, 679, 389, 677, 342, 691, 271, 691, 202, 681, 95, 649, 60, 635, 36, 634, -3, 659, -53, 687, -134, 724, -236, 768, -344, 785, -475, 800, -575, 814, -650, 814, -650, 645, -679, 645, -679, 1000)
+
+[node name="Teardrop" parent="." instance=ExtResource("2_oe1jh")]
+position = Vector2(57, 953)
+collision_mask = 7
+initial_zoom = Vector2(2, 2)
+initial_scale = Vector2(1, 1)
+floor_snap = 0
+
+[node name="NextStage" type="Area2D" parent="."]
+position = Vector2(-276, -212)
+script = ExtResource("3_eh2jp")
+next_level = ExtResource("4_ma7eb")
+
+[node name="NextStageCollision" type="CollisionShape2D" parent="NextStage"]
+position = Vector2(2174, 1311)
+shape = SubResource("RectangleShape2D_suhr2")
+
+[node name="Text1" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 100
+position = Vector2(314, 826)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_uover")
+autoplay = "default"
+
+[node name="TextAppear" type="Area2D" parent="." node_paths=PackedStringArray("text")]
+position = Vector2(1118.5, 837)
+script = ExtResource("7_t4q6k")
+text = NodePath("../Text1")
+
+[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
+position = Vector2(-968.5, 125)
+shape = SubResource("RectangleShape2D_32gqi")
+
+[node name="Text2" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 100
+position = Vector2(1517, 881)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_xhyjv")
+autoplay = "default"
+
+[node name="TextAppear2" type="Area2D" parent="." node_paths=PackedStringArray("text")]
+position = Vector2(1316.7, 995.6)
+script = ExtResource("7_t4q6k")
+text = NodePath("../Text2")
+
+[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear2"]
+position = Vector2(-35.2, -356.35)
+shape = SubResource("RectangleShape2D_p8wla")
+
+[node name="LickPath" type="Path2D" parent="."]
+position = Vector2(0, 733)
+curve = SubResource("Curve2D_0q60t")
+
+[node name="LickFollowPath" type="PathFollow2D" parent="LickPath"]
+position = Vector2(894, 1140)
+rotation = -1.5708
+rotates = false
+script = ExtResource("10_r4k3b")
+
+[node name="TongueContainer" type="StaticBody2D" parent="LickPath/LickFollowPath"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="TongueAnimation" type="AnimatedSprite2D" parent="LickPath/LickFollowPath/TongueContainer"]
+position = Vector2(-42, 0)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_tpe0j")
+autoplay = "default"
+
+[node name="TongueCollision" type="CollisionPolygon2D" parent="LickPath/LickFollowPath/TongueContainer"]
+position = Vector2(-42, 0)
+polygon = PackedVector2Array(81, -169, 202, -166, 366, -158, 528, -153, 642, -144, 726, -144, 758, -82, 765, -21, 745, 49, 711, 88, 676, 115, 582, 137, 484, 157, 412, 169, 340, 175, 252, 174, 170, 175, 102, 182, 81, 185)
+
+[connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
+[connection signal="body_entered" from="TextAppear" to="TextAppear" method="_on_body_entered"]
+[connection signal="body_entered" from="TextAppear2" to="TextAppear2" method="_on_body_entered"]

@@ -1,0 +1,133 @@
+[gd_scene load_steps=19 format=3 uid="uid://ca15000f1ly0n"]
+
+[ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_wq383"]
+[ext_resource type="Texture2D" uid="uid://3snegscm2hnr" path="res://assets/levels/stage2parallax.png" id="2_wjg35"]
+[ext_resource type="PackedScene" uid="uid://dtxv8pnlo7hax" path="res://scenes/Teardrop.tscn" id="3_tb7ix"]
+[ext_resource type="Script" path="res://scripts/ScaleAndZoom.gd" id="4_hf0hk"]
+[ext_resource type="Texture2D" uid="uid://btulwimuf0tq0" path="res://assets/levels/stage2scene1.png" id="5_vtd2w"]
+[ext_resource type="Script" path="res://scripts/NextLevel.gd" id="6_l8tcj"]
+[ext_resource type="PackedScene" uid="uid://bwmcicuk5fvk4" path="res://scenes/Stage2-2.tscn" id="7_xx5fa"]
+[ext_resource type="Texture2D" uid="uid://dxjbkhmcbpsh" path="res://assets/texts/scene2sentance1-1.png" id="8_w68on"]
+[ext_resource type="Texture2D" uid="uid://o50jinw8ve83" path="res://assets/texts/scene2sentance1-2.png" id="9_d00fs"]
+[ext_resource type="Texture2D" uid="uid://02x7s7xv1ac0" path="res://assets/texts/scene2sentance2-1.png" id="10_6pp4i"]
+[ext_resource type="Texture2D" uid="uid://yo0qager7tmy" path="res://assets/texts/scene2sentance2-2.png" id="11_hm40c"]
+[ext_resource type="Script" path="res://scripts/TextAppear.gd" id="12_h67l8"]
+[ext_resource type="Script" path="res://scripts/LeafSpawner.gd" id="13_rd4hp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wc5ca"]
+size = Vector2(384.75, 292.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27mnd"]
+size = Vector2(1, 448)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0wttq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_w68on")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_d00fs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vxsxu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_6pp4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_hm40c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8nus6"]
+size = Vector2(78, 240)
+
+[node name="Stage2-1" type="Node2D"]
+position = Vector2(276, 322)
+script = ExtResource("1_wq383")
+
+[node name="MotionlessBackground" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite2D" parent="MotionlessBackground"]
+position = Vector2(961, 407)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("2_wjg35")
+
+[node name="Teardrop" parent="." instance=ExtResource("3_tb7ix")]
+position = Vector2(33, -284)
+player_control_timeout = 150.0
+initial_zoom = Vector2(2.5, 2.5)
+initial_scale = Vector2(1, 1)
+
+[node name="Tree" type="Sprite2D" parent="."]
+position = Vector2(685, 60)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("5_vtd2w")
+
+[node name="Main" type="StaticBody2D" parent="."]
+
+[node name="GroundCollision" type="CollisionPolygon2D" parent="Main"]
+polygon = PackedVector2Array(-278, 359, -269, 594, -230, 582, -146, 585, -97, 587, -54, 588, -25, 587, 7, 584, 33, 584, 77, 584, 113, 582, 147, 581, 178, 581, 209, 581, 245, 581, 284, 581, 302, 577, 336, 572, 374, 571, 405, 574, 452, 578, 507, 578, 552, 579, 587, 579, 614, 578, 640, 578, 667, 573, 715, 573, 765, 571, 784, 571, 794, 578, 866, 579, 895, 583, 920, 588, 958, 588, 1000, 595, 1062, 601, 1112, 603, 1160, 609, 1187, 607, 1217, 596, 1258, 584, 1292, 577, 1354, 579, 1382, 576, 1414, 585, 1456, 597, 1512, 609, 1553, 614, 1607, 616, 1640, 617, 1640, 620, 1183, 638, -272, 630, -281, 593)
+
+[node name="ZoomOutZone" type="Area2D" parent="."]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("4_hf0hk")
+player_scale = Vector2(0.5, 0.5)
+camera_zoom = Vector2(1.2, 1.2)
+
+[node name="ZoomOutCollision" type="CollisionShape2D" parent="ZoomOutZone"]
+position = Vector2(46, 962)
+shape = SubResource("RectangleShape2D_wc5ca")
+
+[node name="NextStage" type="Area2D" parent="."]
+position = Vector2(-276, -322)
+script = ExtResource("6_l8tcj")
+next_level = ExtResource("7_xx5fa")
+
+[node name="NextStageCollision" type="CollisionShape2D" parent="NextStage"]
+position = Vector2(1922, 823)
+shape = SubResource("RectangleShape2D_27mnd")
+
+[node name="Text1" type="AnimatedSprite2D" parent="."]
+z_index = 10
+position = Vector2(31, 192)
+sprite_frames = SubResource("SpriteFrames_0wttq")
+autoplay = "default"
+frame_progress = 0.0818177
+
+[node name="Text2" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 10
+position = Vector2(1101, 225)
+sprite_frames = SubResource("SpriteFrames_vxsxu")
+autoplay = "default"
+frame_progress = 0.287045
+
+[node name="TextAppear" type="Area2D" parent="." node_paths=PackedStringArray("text")]
+script = ExtResource("12_h67l8")
+text = NodePath("../Text2")
+
+[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
+position = Vector2(973, 452)
+shape = SubResource("RectangleShape2D_8nus6")
+
+[node name="LeafSpawner" type="Node2D" parent="."]
+script = ExtResource("13_rd4hp")
+
+[node name="LeafTimer" type="Timer" parent="LeafSpawner"]
+autostart = true
+
+[connection signal="body_entered" from="ZoomOutZone" to="ZoomOutZone" method="_on_body_entered"]
+[connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
+[connection signal="body_entered" from="TextAppear" to="TextAppear" method="_on_body_entered"]
+[connection signal="timeout" from="LeafSpawner/LeafTimer" to="LeafSpawner" method="_on_leaf_timer_timeout"]

@@ -1,0 +1,124 @@
+[gd_scene load_steps=19 format=3 uid="uid://c7qj03vctgfnf"]
+
+[ext_resource type="Texture2D" uid="uid://clh1ifs60js2q" path="res://assets/final_stage/finalscene13.png" id="1_emksy"]
+[ext_resource type="Script" path="res://scripts/FinalStage.gd" id="1_ralhh"]
+[ext_resource type="Texture2D" uid="uid://c6egganismi70" path="res://assets/final_stage/finalscene14.png" id="2_0w6yj"]
+[ext_resource type="Texture2D" uid="uid://djvhsichtvu1e" path="res://assets/final_stage/finalscene1.png" id="3_jqo1r"]
+[ext_resource type="Texture2D" uid="uid://d06wyq2r2xvw7" path="res://assets/final_stage/finalscene12.png" id="3_uapv5"]
+[ext_resource type="Texture2D" uid="uid://b8l7dik5lpke3" path="res://assets/final_stage/finalscene11.png" id="4_005y1"]
+[ext_resource type="Texture2D" uid="uid://t7n6bgcfm8k6" path="res://assets/final_stage/finalscene10.png" id="5_at8ia"]
+[ext_resource type="Texture2D" uid="uid://ymui4ejwqk75" path="res://assets/final_stage/finalscene9.png" id="6_qdnxu"]
+[ext_resource type="Texture2D" uid="uid://bupmhgquusirs" path="res://assets/final_stage/finalscene8.png" id="7_oaldl"]
+[ext_resource type="Texture2D" uid="uid://bo4u62g5untkf" path="res://assets/final_stage/finalscene7.png" id="8_2ofav"]
+[ext_resource type="Texture2D" uid="uid://bx5d0sansydkf" path="res://assets/final_stage/finalscene6.png" id="9_6xibg"]
+[ext_resource type="Texture2D" uid="uid://dgk6gmiftkuqc" path="res://assets/final_stage/finalscene5.png" id="10_7ajdx"]
+[ext_resource type="Texture2D" uid="uid://dktw23rtjkblw" path="res://assets/final_stage/finalscene4.png" id="11_7mi3h"]
+[ext_resource type="Texture2D" uid="uid://dhto76m6kmc7m" path="res://assets/final_stage/finalscene3.png" id="12_cfhlb"]
+[ext_resource type="Texture2D" uid="uid://bbkf0irlg1xjy" path="res://assets/final_stage/finalscene2.png" id="13_fch7y"]
+[ext_resource type="AudioStream" uid="uid://c2tapgaercvjb" path="res://assets/sfx/rain.wav" id="16_1qrv4"]
+[ext_resource type="AudioStream" uid="uid://drif3cys6khnn" path="res://assets/sfx/huh.wav" id="17_furgi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ili7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_emksy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0w6yj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="FinalStage" type="Node2D"]
+script = ExtResource("1_ralhh")
+
+[node name="Credits" type="AnimatedSprite2D" parent="."]
+position = Vector2(948, 546)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_4ili7")
+autoplay = "default"
+frame_progress = 0.911861
+
+[node name="Scene1" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 664)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("3_uapv5")
+
+[node name="Scene2" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 664)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("4_005y1")
+
+[node name="Scene3" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 664)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("5_at8ia")
+
+[node name="Scene4" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 664)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("6_qdnxu")
+
+[node name="Scene5" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 384)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("7_oaldl")
+
+[node name="Scene6" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 384)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("8_2ofav")
+
+[node name="Scene7" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 384)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("9_6xibg")
+
+[node name="Scene8" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 384)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("10_7ajdx")
+
+[node name="Scene9" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 384)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("11_7mi3h")
+
+[node name="Scene10" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 384)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("12_cfhlb")
+
+[node name="Scene11" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 384)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("13_fch7y")
+
+[node name="Scene12" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(961, 384)
+scale = Vector2(0.822, 0.822)
+texture = ExtResource("3_jqo1r")
+
+[node name="AmbientRain" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_1qrv4")
+volume_db = -10.0
+autoplay = true
+
+[node name="HuhSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_furgi")
+volume_db = -5.0

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://e5kf7hp47p2d"]
+
+[ext_resource type="Texture2D" uid="uid://68l7u4w7x2wg" path="res://assets/entities/leaf1.png" id="1_4cqpv"]
+[ext_resource type="Script" path="res://scripts/Leaf.gd" id="1_dl4xr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0q8e"]
+radius = 42.0476
+
+[node name="Leaf" type="CharacterBody2D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_dl4xr")
+
+[node name="LeafSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_4cqpv")
+
+[node name="LeafCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g0q8e")
