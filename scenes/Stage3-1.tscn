@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bp7tti5pid3bb"]
+[gd_scene load_steps=23 format=3 uid="uid://bp7tti5pid3bb"]
 
 [ext_resource type="Texture2D" uid="uid://d4ftyrw85ojhk" path="res://assets/levels/stage3parallex.png" id="1_eg0rf"]
 [ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_w8534"]
@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://i5kputlrlbm3" path="res://assets/texts/scene3sentance2-1.png" id="8_ba0ks"]
 [ext_resource type="Texture2D" uid="uid://bsmmgmojx6pkf" path="res://assets/texts/scene3sentance2-2.png" id="9_2g8yr"]
 [ext_resource type="PackedScene" uid="uid://bm81e27jo66lk" path="res://scenes/TeardropNPC2.tscn" id="11_824i7"]
+[ext_resource type="AudioStream" uid="uid://cg6j8vsivuq5k" path="res://assets/nerration/scene_3_sentence_1mp3.mp3" id="11_jms5f"]
+[ext_resource type="AudioStream" uid="uid://p433y0aovk8y" path="res://assets/nerration/scene_3_sentence_2mp3.mp3" id="14_s3g7s"]
+[ext_resource type="AudioStream" uid="uid://c7s2mjtrhvexv" path="res://assets/nerration/scene_2_sentence_1.mp3" id="16_24qbn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ey04x"]
 size = Vector2(1, 448)
@@ -111,6 +114,7 @@ frame_progress = 0.996265
 [node name="TextAppear" type="Area2D" parent="." node_paths=PackedStringArray("text")]
 script = ExtResource("7_q516g")
 text = NodePath("../Text1")
+narration = ExtResource("11_jms5f")
 
 [node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
 position = Vector2(320, 412)
@@ -126,6 +130,7 @@ autoplay = "default"
 [node name="TextAppear2" type="Area2D" parent="." node_paths=PackedStringArray("text")]
 script = ExtResource("7_q516g")
 text = NodePath("../Text2")
+narration = ExtResource("14_s3g7s")
 
 [node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear2"]
 position = Vector2(1063, 438.438)
@@ -184,6 +189,9 @@ position = Vector2(910, 603)
 
 [node name="TeardropNPC19" parent="." instance=ExtResource("11_824i7")]
 position = Vector2(1047, 632)
+
+[node name="Narration" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_24qbn")
 
 [connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
 [connection signal="body_entered" from="RaindropArea" to="RaindropArea" method="_on_body_entered"]

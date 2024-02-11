@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://8uihdx84efla"]
+[gd_scene load_steps=24 format=3 uid="uid://8uihdx84efla"]
 
 [ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_cg4cf"]
 [ext_resource type="Texture2D" uid="uid://de4vax6gfqh5u" path="res://assets/levels/stage1scene2.png" id="1_epu1m"]
@@ -10,9 +10,12 @@
 [ext_resource type="Script" path="res://scripts/TextAppear.gd" id="7_t4q6k"]
 [ext_resource type="Texture2D" uid="uid://xh5hcvdajera" path="res://assets/texts/scene1sentance4-1.png" id="8_ebexj"]
 [ext_resource type="Texture2D" uid="uid://bab217j5tlm6o" path="res://assets/texts/scene1sentance4-2.png" id="9_mjdsx"]
+[ext_resource type="AudioStream" uid="uid://cjm224mqfbnxs" path="res://assets/nerration/scene_1_sentence_3.mp3" id="9_nv5y4"]
 [ext_resource type="Texture2D" uid="uid://cy2jisgmmm75r" path="res://assets/entities/tongue1.png" id="10_62u8n"]
 [ext_resource type="Script" path="res://scripts/LickFollowPath.gd" id="10_r4k3b"]
 [ext_resource type="Texture2D" uid="uid://dyvgsveapl8pn" path="res://assets/entities/tongue2.png" id="11_k4v7h"]
+[ext_resource type="AudioStream" uid="uid://888e8sy5827e" path="res://assets/nerration/scene_1_sentence_4.mp3" id="12_cq3qq"]
+[ext_resource type="AudioStream" uid="uid://baecl0piy4cqc" path="res://assets/nerration/first_text.mp3" id="15_0g8xt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_suhr2"]
 size = Vector2(236.375, 8)
@@ -68,7 +71,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [node name="Stage1-2" type="Node2D"]
@@ -114,6 +117,7 @@ autoplay = "default"
 position = Vector2(1118.5, 837)
 script = ExtResource("7_t4q6k")
 text = NodePath("../Text1")
+narration = ExtResource("9_nv5y4")
 
 [node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
 position = Vector2(-968.5, 125)
@@ -131,13 +135,14 @@ autoplay = "default"
 position = Vector2(1316.7, 995.6)
 script = ExtResource("7_t4q6k")
 text = NodePath("../Text2")
+narration = ExtResource("12_cq3qq")
 
 [node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear2"]
 position = Vector2(-35.2, -356.35)
 shape = SubResource("RectangleShape2D_p8wla")
 
 [node name="LickPath" type="Path2D" parent="."]
-position = Vector2(0, 733)
+position = Vector2(0, 790)
 curve = SubResource("Curve2D_0q60t")
 
 [node name="LickFollowPath" type="PathFollow2D" parent="LickPath"]
@@ -159,6 +164,9 @@ autoplay = "default"
 [node name="TongueCollision" type="CollisionPolygon2D" parent="LickPath/LickFollowPath/TongueContainer"]
 position = Vector2(-42, 0)
 polygon = PackedVector2Array(81, -169, 202, -166, 366, -158, 528, -153, 642, -144, 726, -144, 758, -82, 765, -21, 745, 49, 711, 88, 676, 115, 582, 137, 484, 157, 412, 169, 340, 175, 252, 174, 170, 175, 102, 182, 81, 185)
+
+[node name="Narration" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_0g8xt")
 
 [connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
 [connection signal="body_entered" from="TextAppear" to="TextAppear" method="_on_body_entered"]

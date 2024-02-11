@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ca15000f1ly0n"]
+[gd_scene load_steps=21 format=3 uid="uid://ca15000f1ly0n"]
 
 [ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_wq383"]
 [ext_resource type="Texture2D" uid="uid://3snegscm2hnr" path="res://assets/levels/stage2parallax.png" id="2_wjg35"]
@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://02x7s7xv1ac0" path="res://assets/texts/scene2sentance2-1.png" id="10_6pp4i"]
 [ext_resource type="Texture2D" uid="uid://yo0qager7tmy" path="res://assets/texts/scene2sentance2-2.png" id="11_hm40c"]
 [ext_resource type="Script" path="res://scripts/TextAppear.gd" id="12_h67l8"]
+[ext_resource type="AudioStream" uid="uid://be1fl3c88gmjb" path="res://assets/nerration/scene_2_sentence_2.mp3" id="13_hppeg"]
 [ext_resource type="Script" path="res://scripts/LeafSpawner.gd" id="13_rd4hp"]
+[ext_resource type="AudioStream" uid="uid://c7s2mjtrhvexv" path="res://assets/nerration/scene_2_sentence_1.mp3" id="14_7o2xn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wc5ca"]
 size = Vector2(384.75, 292.5)
@@ -116,6 +118,7 @@ frame_progress = 0.287045
 [node name="TextAppear" type="Area2D" parent="." node_paths=PackedStringArray("text")]
 script = ExtResource("12_h67l8")
 text = NodePath("../Text2")
+narration = ExtResource("13_hppeg")
 
 [node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
 position = Vector2(973, 452)
@@ -126,6 +129,11 @@ script = ExtResource("13_rd4hp")
 
 [node name="LeafTimer" type="Timer" parent="LeafSpawner"]
 autostart = true
+
+[node name="Narration" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_7o2xn")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="body_entered" from="ZoomOutZone" to="ZoomOutZone" method="_on_body_entered"]
 [connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://j4ixq56imk1t"]
+[gd_scene load_steps=19 format=3 uid="uid://j4ixq56imk1t"]
 
 [ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_wq383"]
 [ext_resource type="Texture2D" uid="uid://bnl373wy6wjh6" path="res://assets/levels/stage1scene1.png" id="2_0jgvd"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://dfushm1wgxq5h" path="res://assets/texts/scene1sentance1-2.png" id="7_hlkal"]
 [ext_resource type="Texture2D" uid="uid://cfify4fgdjtbi" path="res://assets/texts/scene1sentance2-2.png" id="7_tyt5t"]
 [ext_resource type="Script" path="res://scripts/TextAppear.gd" id="8_e7nj0"]
+[ext_resource type="AudioStream" uid="uid://x6mccidmobtc" path="res://assets/nerration/scene_1_sentence_1mp3.mp3" id="9_nysrs"]
+[ext_resource type="AudioStream" uid="uid://baecl0piy4cqc" path="res://assets/nerration/first_text.mp3" id="12_87lv1"]
+[ext_resource type="AudioStream" uid="uid://5kppf7nspgot" path="res://assets/nerration/scene_1_sentence_2.mp3" id="12_sqkci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6m0le"]
 size = Vector2(1, 448)
@@ -95,6 +98,7 @@ autoplay = "default"
 position = Vector2(1118.5, 727)
 script = ExtResource("8_e7nj0")
 text = NodePath("../Text1")
+narration = ExtResource("9_nysrs")
 
 [node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear1"]
 position = Vector2(-717.5, -523)
@@ -111,10 +115,14 @@ autoplay = "default"
 position = Vector2(997, 494)
 script = ExtResource("8_e7nj0")
 text = NodePath("../Text2")
+narration = ExtResource("12_sqkci")
 
 [node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear2"]
 position = Vector2(-189, -149.438)
 shape = SubResource("RectangleShape2D_gtwnm")
+
+[node name="Narration" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_87lv1")
 
 [connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
 [connection signal="body_entered" from="TextAppear1" to="TextAppear1" method="_on_body_entered"]

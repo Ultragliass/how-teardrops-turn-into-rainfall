@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://db3762ayjf535"]
+[gd_scene load_steps=25 format=3 uid="uid://db3762ayjf535"]
 
 [ext_resource type="Texture2D" uid="uid://besfxhrolqvri" path="res://assets/levels/intro1.png" id="1_aiw6y"]
 [ext_resource type="Script" path="res://scripts/TitleScreen.gd" id="1_whils"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dlwwfhacna4w" path="res://assets/player/idle3.png" id="17_5sqna"]
 [ext_resource type="Texture2D" uid="uid://sxuq5f6xykqs" path="res://assets/player/idle4.png" id="18_fqc7x"]
 [ext_resource type="Texture2D" uid="uid://drx0x5tfw81l2" path="res://assets/player/idle5.png" id="19_hpshv"]
+[ext_resource type="AudioStream" uid="uid://baecl0piy4cqc" path="res://assets/nerration/first_text.mp3" id="21_sguph"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xcjyd"]
 animations = [{
@@ -121,12 +122,14 @@ sprite_frames = SubResource("SpriteFrames_oklvy")
 autoplay = "default"
 
 [node name="UI" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(972, 696)
 scale = Vector2(0.822, 0.822)
 texture = ExtResource("8_tchh0")
 
 [node name="Logo" type="Sprite2D" parent="UI"]
 position = Vector2(-24.3311, -515.815)
+rotation = -0.174533
 scale = Vector2(1.21654, 1.21654)
 texture = ExtResource("9_7vm1e")
 
@@ -150,6 +153,9 @@ position = Vector2(-256.691, 156.934)
 sprite_frames = SubResource("SpriteFrames_xfua8")
 autoplay = "default"
 frame_progress = 0.260036
+
+[node name="Narration" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_sguph")
 
 [connection signal="input_event" from="UI/CryButtonArea" to="." method="_on_cry_button_area_input_event"]
 [connection signal="mouse_entered" from="UI/CryButtonArea" to="." method="_on_area_2d_mouse_entered"]

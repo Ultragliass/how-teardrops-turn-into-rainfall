@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://xtt0k6a4f042"]
+[gd_scene load_steps=15 format=3 uid="uid://xtt0k6a4f042"]
 
 [ext_resource type="Texture2D" uid="uid://d4ftyrw85ojhk" path="res://assets/levels/stage3parallex.png" id="1_7j000"]
 [ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_f1uky"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://vtgqkbxlhl2r" path="res://assets/texts/scene3sentance3-2.png" id="5_aixy8"]
 [ext_resource type="PackedScene" uid="uid://f4lf446nhojp" path="res://scenes/Stage3-3.tscn" id="5_s5ym3"]
 [ext_resource type="Script" path="res://scripts/TextAppear.gd" id="6_1gckb"]
+[ext_resource type="AudioStream" uid="uid://bl6d13fm4t33g" path="res://assets/nerration/scene_3_sentence_3.mp3" id="10_m2x6l"]
+[ext_resource type="AudioStream" uid="uid://c7s2mjtrhvexv" path="res://assets/nerration/scene_2_sentence_1.mp3" id="11_l5ra5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8g5wm"]
 size = Vector2(1, 448)
@@ -78,10 +80,14 @@ autoplay = "default"
 position = Vector2(632, 510)
 script = ExtResource("6_1gckb")
 text = NodePath("../Text1")
+narration = ExtResource("10_m2x6l")
 
 [node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
 position = Vector2(288.5, 416.5)
 shape = SubResource("RectangleShape2D_02d28")
+
+[node name="Narration" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_l5ra5")
 
 [connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
 [connection signal="body_entered" from="TextAppear" to="TextAppear" method="_on_body_entered"]

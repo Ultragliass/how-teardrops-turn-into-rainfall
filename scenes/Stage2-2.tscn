@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bwmcicuk5fvk4"]
+[gd_scene load_steps=21 format=3 uid="uid://bwmcicuk5fvk4"]
 
 [ext_resource type="Texture2D" uid="uid://3snegscm2hnr" path="res://assets/levels/stage2parallax.png" id="1_682i1"]
 [ext_resource type="Script" path="res://scripts/StartStage.gd" id="1_7288l"]
@@ -11,7 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://cj5hy2uuo1gu2" path="res://assets/texts/scene2sentance3-2.png" id="9_wldrf"]
 [ext_resource type="Texture2D" uid="uid://c2bvd184xo20a" path="res://assets/texts/scene2sentance4-1.png" id="10_54abk"]
 [ext_resource type="Texture2D" uid="uid://dbkjbkg2ydxc6" path="res://assets/texts/scene2sentance4-2.png" id="11_afw0v"]
+[ext_resource type="AudioStream" uid="uid://y8dvpik6glxh" path="res://assets/nerration/scene_2_sentence_3_1.mp3" id="11_pr265"]
 [ext_resource type="Script" path="res://scripts/TextAppear.gd" id="12_8tnc5"]
+[ext_resource type="AudioStream" uid="uid://c7s2mjtrhvexv" path="res://assets/nerration/scene_2_sentence_1.mp3" id="13_ove6x"]
+[ext_resource type="AudioStream" uid="uid://c03kuq4lvy8uo" path="res://assets/nerration/scene_2_sentence_3_2.mp3" id="14_bkd5d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fqnbh"]
 size = Vector2(1, 448)
@@ -30,6 +33,9 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8fo5"]
+size = Vector2(78, 240)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_bsaku"]
 animations = [{
 "frames": [{
@@ -43,9 +49,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8fo5"]
-size = Vector2(78, 240)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4yxvt"]
 size = Vector2(24, 201)
@@ -107,27 +110,32 @@ position = Vector2(325, 475)
 sprite_frames = SubResource("SpriteFrames_a4xba")
 autoplay = "default"
 
+[node name="TextAppear" type="Area2D" parent="." node_paths=PackedStringArray("text")]
+script = ExtResource("12_8tnc5")
+text = NodePath("../Text1")
+narration = ExtResource("11_pr265")
+
+[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
+position = Vector2(217, 815)
+shape = SubResource("RectangleShape2D_v8fo5")
+
 [node name="Text2" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(1051, 474)
 sprite_frames = SubResource("SpriteFrames_bsaku")
 autoplay = "default"
 
-[node name="TextAppear" type="Area2D" parent="." node_paths=PackedStringArray("text")]
-script = ExtResource("12_8tnc5")
-text = NodePath("../Text1")
-
-[node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear"]
-position = Vector2(217, 815)
-shape = SubResource("RectangleShape2D_v8fo5")
-
 [node name="TextAppear2" type="Area2D" parent="." node_paths=PackedStringArray("text")]
 script = ExtResource("12_8tnc5")
 text = NodePath("../Text2")
+narration = ExtResource("14_bkd5d")
 
 [node name="TextAppearCollision" type="CollisionShape2D" parent="TextAppear2"]
 position = Vector2(866, 557)
 shape = SubResource("RectangleShape2D_4yxvt")
+
+[node name="Narration" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_ove6x")
 
 [connection signal="body_entered" from="NextStage" to="NextStage" method="_on_body_entered"]
 [connection signal="body_entered" from="TextAppear" to="TextAppear" method="_on_body_entered"]

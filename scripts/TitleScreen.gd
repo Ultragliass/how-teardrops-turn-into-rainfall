@@ -4,6 +4,18 @@ var is_started = false
 
 @export var initial_scene: PackedScene
 
+func _ready(): turn_left()
+
+func turn_left():
+	var tween = create_tween()
+	tween.tween_property($UI/Logo, "rotation", 0.2, 1)
+	tween.tween_callback(turn_right)
+	
+func turn_right():
+	var tween = create_tween()
+	tween.tween_property($UI/Logo, "rotation", -0.2, 1)
+	tween.tween_callback(turn_left)
+
 func _on_area_2d_mouse_entered(): create_tween().tween_property($UI/CryButton, "scale", Vector2(1.2, 1.2), 0.1)
 
 func _on_cry_button_area_mouse_exited(): create_tween().tween_property($UI/CryButton, "scale", Vector2(1, 1), 0.1)
@@ -20,6 +32,7 @@ func show_intro():
 	var tween = create_tween()
 	tween.connect("finished", cry)
 	tween.tween_property($Text, "modulate:a", 1, 2)
+	tween.tween_callback($Narration.play)
 	tween.tween_interval(5)
 	
 func cry(): 
